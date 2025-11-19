@@ -1,0 +1,57 @@
+create table transacciones (
+codigo int not null,
+numero_cuenta char (5) not null,
+monto money not null,
+tipo char (1) not null,
+fecha date not null,
+hora time not null,
+constraint transacciones_pk primary key (codigo)
+);
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(1,'12345',20.00,'C','17/11/2025','22:00');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(2,'45612',35.00,'D','17/11/2025','16:54');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(3,'56423',12.50,'D','17/11/2025','03:50');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(4,'12345',101.01,'C','17/11/2025','12:15');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(5,'56423',57.80,'D','17/11/2025','19:32');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(6,'98745',69.96,'D','17/11/2025','20:49');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(7,'12345',1.00,'D','17/11/2025','23:37');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(8,'67895',28.00,'C','17/11/2025','09:01');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(9,'12345',71.35,'C','17/11/2025','12:15');
+insert into transacciones(codigo,numero_cuenta,monto,tipo,fecha,hora)
+values(10,'67895',659.12,'D','17/11/2025','14:15');
+
+-- comparaciones 
+select * from transacciones where tipo = 'D';
+select * from transacciones where monto between '200' and '2000';
+select codigo,monto,tipo,fecha from transacciones where fecha is not null;
+
+-- actualizaciones 
+update transacciones set tipo = 'T' 
+where monto > '100' and monto < '500' 
+and fecha between '01/09/2025' and '30/09/2025'
+and hora between '14:00' and '20:00';
+
+-- eliminación 
+delete from transacciones
+where hora between '14:00' and '18:00'
+and fecha between '01/08/2025' and '31/08/2025';
+
+-- selección II 
+elect * from transacciones where tipo = 'C' 
+and numero_cuenta between '22001' and '22004';
+
+select * from transacciones where tipo = 'D' 
+and fecha = '25/05/2025' 
+and numero_cuenta between '22007' and '22010';
+
+select * from transacciones where (codigo between '1' and '5'
+and numero_cuenta between '22002' and '22004')
+and (fecha = '26/05/2025' or fecha = '29/05/2025');
